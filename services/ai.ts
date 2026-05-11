@@ -10,7 +10,7 @@ export class AIService {
       return "Clé API manquante. Veuillez configurer EXPO_PUBLIC_GEMINI_API_KEY dans votre fichier .env.";
     }
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
     const systemPrompt = `
       Tu es DeepVital, un expert en intelligence biomédicale.

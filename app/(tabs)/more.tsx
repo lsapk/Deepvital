@@ -1,110 +1,85 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity, Switch } from 'react-native';
+import React from 'react';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { User, Shield, Zap, Settings, ChevronRight, Info } from 'lucide-react-native';
-import { getDatabase } from '@/services/database';
+import { User, Bell, Shield, LogOut, Moon, Sun, Info } from 'lucide-react-native';
 import { useTheme } from '@/constants/Colors';
-
-const SettingItem = ({ icon: Icon, title, value, type = 'link', onValueChange, theme }: any) => (
-  <TouchableOpacity style={[styles.settingItem, { borderBottomColor: theme.border }]} disabled={type === 'switch'}>
-    <View style={styles.settingLeft}>
-      <View style={[styles.iconContainer, { backgroundColor: theme.border }]}>
-        <Icon color={theme.text} size={20} />
-      </View>
-      <Text style={[styles.settingTitle, { color: theme.text }]}>{title}</Text>
-    </View>
-    <View style={styles.settingRight}>
-      {type === 'link' && <ChevronRight color={theme.secondaryText} size={20} />}
-      {type === 'switch' && (
-        <Switch
-          value={value}
-          onValueChange={onValueChange}
-          trackColor={{ false: '#D1D1D6', true: '#4CD964' }}
-        />
-      )}
-      {type === 'text' && <Text style={[styles.settingValueText, { color: theme.secondaryText }]}>{value}</Text>}
-    </View>
-  </TouchableOpacity>
-);
+import { useAuth } from '@/hooks/useAuth';
 
 export default function MoreScreen() {
-  const [isLocalIA, setIsLocalIA] = useState(false);
   const theme = useTheme();
+  const { user, signOut } = useAuth();
 
-  useEffect(() => {
-    async function load() {
-      const db = await getDatabase();
-      const res = await db.getFirstAsync<{ value: string }>('SELECT value FROM app_settings WHERE key = ?', ['ai_local_mode']);
-      if (res) setIsLocalIA(res.value === 'true');
-    }
-    load();
-  }, []);
-
-  const toggleLocalIA = async (val: boolean) => {
-    setIsLocalIA(val);
-    const db = await getDatabase();
-    await db.runAsync('INSERT OR REPLACE INTO app_settings (key, value) VALUES (?, ?)', ['ai_local_mode', val.toString()]);
+  const handleSignOut = async () => {
+    Alert.alert(
+      "Déconnexion",
+      "Êtes-vous sûr de vouloir vous déconnecter ?",
+      [
+        { text: "Annuler", style: "cancel" },
+        { text: "Déconnexion", style: "destructive", onPress: async () => await signOut() }
+      ]
+    );
   };
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]} edges={['top']}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Text style={[styles.headerTitle, { color: theme.text }]}>PARAMÈTRES</Text>
+        <View style={styles.header}>
+          <Text style={[styles.headerTitle, { color: theme.text }]}>PARAMÈTRES</Text>
+        </View>
 
-        <View style={[styles.profileSection, { backgroundColor: theme.card }]}>
-          <View style={styles.profileInfo}>
-            <View style={[styles.avatarLarge, { backgroundColor: theme.border }]}>
-              <User color={theme.secondaryText} size={40} />
-            </View>
-            <View>
-              <Text style={[styles.userName, { color: theme.text }]}>Utilisateur DeepVital</Text>
-              <Text style={[styles.userBio, { color: theme.secondaryText }]}>Optimisation Longévité</Text>
-            </View>
+        <View style={[styles.profileCard, { backgroundColor: theme.card }]}>
+          <View style={[styles.avatar, { backgroundColor: theme.primary }]}>
+             <User color="#FFF" size={32} />
           </View>
-          <TouchableOpacity style={[styles.editButton, { backgroundColor: theme.border }]}>
-            <Text style={[styles.editButtonText, { color: theme.text }]}>Modifier le profil</Text>
+          <View style={styles.profileInfo}>
+            <Text style={[styles.profileName, { color: theme.text }]}>{user?.email || "Utilisateur"}</Text>
+            <Text style={[styles.profileStatus, { color: theme.secondaryText }]}>Membre Premium</Text>
+          </View>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: theme.secondaryText }]}>COMPTE</Text>
+          <TouchableOpacity style={[styles.item, { backgroundColor: theme.card }]}>
+            <View style={styles.itemLeft}>
+              <User size={20} color={theme.text} />
+              <Text style={[styles.itemText, { color: theme.text }]}>Profil Personnel</Text>
+            </View>
+            <Info size={18} color={theme.border} />
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.item, { backgroundColor: theme.card }]}>
+            <View style={styles.itemLeft}>
+              <Bell size={20} color={theme.text} />
+              <Text style={[styles.itemText, { color: theme.text }]}>Notifications</Text>
+            </View>
           </TouchableOpacity>
         </View>
 
         <View style={styles.section}>
-          <Text style={[styles.sectionLabel, { color: theme.secondaryText }]}>INTELLIGENCE ARTIFICIELLE</Text>
-          <View style={[styles.settingsGroup, { backgroundColor: theme.card }]}>
-            <SettingItem
-              icon={Shield}
-              title="Mode Confidentialité (IA Locale)"
-              type="switch"
-              value={isLocalIA}
-              onValueChange={toggleLocalIA}
-              theme={theme}
-            />
-            <SettingItem
-              icon={Zap}
-              title="Modèle"
-              type="text"
-              value={isLocalIA ? "Llama 3.2 1B" : "Gemini 1.5 Flash"}
-              theme={theme}
-            />
-            <SettingItem
-              icon={Settings}
-              title="Personnalité du Coach"
-              type="text"
-              value="Scientifique"
-              theme={theme}
-            />
-          </View>
+          <Text style={[styles.sectionTitle, { color: theme.secondaryText }]}>PRÉFÉRENCES</Text>
+          <TouchableOpacity style={[styles.item, { backgroundColor: theme.card }]}>
+            <View style={styles.itemLeft}>
+              <Sun size={20} color={theme.text} />
+              <Text style={[styles.itemText, { color: theme.text }]}>Thème</Text>
+            </View>
+            <Text style={[styles.itemValue, { color: theme.secondaryText }]}>Système</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.item, { backgroundColor: theme.card }]}>
+            <View style={styles.itemLeft}>
+              <Shield size={20} color={theme.text} />
+              <Text style={[styles.itemText, { color: theme.text }]}>Confidentialité</Text>
+            </View>
+          </TouchableOpacity>
         </View>
 
-        <View style={styles.section}>
-          <Text style={[styles.sectionLabel, { color: theme.secondaryText }]}>DONNÉES & SOURCES</Text>
-          <View style={[styles.settingsGroup, { backgroundColor: theme.card }]}>
-            <SettingItem icon={Shield} title="Santé Connect" type="text" value="Connecté" theme={theme} />
-            <SettingItem icon={Info} title="Exporter mes données (JSON)" theme={theme} />
-          </View>
-        </View>
-
-        <TouchableOpacity style={styles.logoutButton}>
-          <Text style={styles.logoutText}>Réinitialiser l'application</Text>
+        <TouchableOpacity
+          style={[styles.signOutButton, { borderColor: theme.border }]}
+          onPress={handleSignOut}
+        >
+          <LogOut size={20} color="#FF3B30" />
+          <Text style={styles.signOutText}>Se déconnecter</Text>
         </TouchableOpacity>
+
+        <Text style={[styles.versionText, { color: theme.secondaryText }]}>DeepVital v1.0.0 (Stable)</Text>
       </ScrollView>
     </SafeAreaView>
   );
@@ -116,104 +91,88 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 20,
+    paddingBottom: 120,
+  },
+  header: {
+    marginBottom: 30,
   },
   headerTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    letterSpacing: 1,
-    marginBottom: 20,
+    fontSize: 24,
+    fontWeight: '800',
+    letterSpacing: 2,
   },
-  profileSection: {
-    borderRadius: 24,
-    padding: 20,
-    marginBottom: 24,
-    alignItems: 'center',
-  },
-  profileInfo: {
+  profileCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 15,
-    width: '100%',
-    marginBottom: 20,
+    padding: 20,
+    borderRadius: 24,
+    marginBottom: 30,
   },
-  avatarLarge: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+  avatar: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  userName: {
-    fontSize: 20,
+  profileInfo: {
+    marginLeft: 15,
+  },
+  profileName: {
+    fontSize: 18,
     fontWeight: '700',
   },
-  userBio: {
+  profileStatus: {
     fontSize: 14,
-  },
-  editButton: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 20,
-    width: '100%',
-    alignItems: 'center',
-  },
-  editButtonText: {
-    fontSize: 14,
-    fontWeight: '600',
+    marginTop: 2,
   },
   section: {
-    marginBottom: 24,
+    marginBottom: 25,
   },
-  sectionLabel: {
+  sectionTitle: {
     fontSize: 12,
-    fontWeight: '600',
-    marginLeft: 10,
-    marginBottom: 8,
-    letterSpacing: 0.5,
+    fontWeight: '700',
+    marginBottom: 10,
+    marginLeft: 5,
   },
-  settingsGroup: {
-    borderRadius: 20,
-    overflow: 'hidden',
-  },
-  settingItem: {
+  item: {
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 16,
-    borderBottomWidth: 1,
+    borderRadius: 16,
+    marginBottom: 8,
   },
-  settingLeft: {
+  itemLeft: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
   },
-  iconContainer: {
-    width: 32,
-    height: 32,
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  settingTitle: {
+  itemText: {
     fontSize: 16,
     fontWeight: '500',
   },
-  settingRight: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  settingValueText: {
+  itemValue: {
     fontSize: 14,
   },
-  logoutButton: {
-    marginTop: 10,
-    padding: 20,
+  signOutButton: {
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
+    padding: 16,
+    borderRadius: 16,
+    borderWidth: 1,
+    marginTop: 20,
   },
-  logoutText: {
+  signOutText: {
     color: '#FF3B30',
     fontSize: 16,
     fontWeight: '600',
   },
+  versionText: {
+    textAlign: 'center',
+    marginTop: 30,
+    fontSize: 12,
+  }
 });
