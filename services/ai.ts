@@ -47,9 +47,16 @@ export class AIService {
 
     const db = await getDatabase();
 
-    // 1. Get User Context
+    // 1. Get User Context (with robust parsing)
     const profile = await db.getAllAsync<{ question_id: string, answer: string }>('SELECT question_id, answer FROM user_profile');
-    const contextData = JSON.stringify(profile);
+    const parsedProfile = profile.reduce((acc, curr) => {
+      try {
+        return { ...acc, [curr.question_id]: JSON.parse(curr.answer) };
+      } catch {
+        return { ...acc, [curr.question_id]: curr.answer };
+      }
+    }, {});
+    const contextData = JSON.stringify(parsedProfile);
 
     // 2. Initial AI Analysis
     const initialResponse = await this.getGeminiResponse(userMessage, contextData);

@@ -2,6 +2,7 @@ import * as SQLite from 'expo-sqlite';
 
 const DATABASE_NAME = 'deepvital.db';
 let dbInstance: SQLite.SQLiteDatabase | null = null;
+let isInitializing = false;
 
 export async function getDatabase() {
   if (dbInstance) return dbInstance;
@@ -10,6 +11,8 @@ export async function getDatabase() {
 }
 
 export async function initDatabase() {
+  if (isInitializing) return;
+  isInitializing = true;
   try {
     const db = await getDatabase();
 

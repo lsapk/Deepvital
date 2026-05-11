@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Stack, useRouter, useSegments } from 'expo-router';
 import { AuthProvider, useAuth } from '@/hooks/useAuth';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { initDatabase } from '@/services/database';
+import { initDatabase, getDatabase } from '@/services/database';
 import { FloatingAIAssistant } from '@/components/FloatingAIAssistant';
 
 function RootLayoutNav() {

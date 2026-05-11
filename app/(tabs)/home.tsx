@@ -62,10 +62,21 @@ export default function HomeScreen() {
         ['ExerciseSession', startOfDay.toISOString(), endOfDay.toISOString()]
       );
 
+      // Dynamic targets from profile
+      const profile = await db.getAllAsync<{ question_id: string, answer: string }>('SELECT question_id, answer FROM user_profile');
+      const getVal = (id: string) => {
+        const item = profile.find(p => p.question_id === id);
+        return item ? JSON.parse(item.answer) : null;
+      };
+
+      const calorieTarget = getVal('goal') === 'Perte de poids' ? 2200 : 2800;
+      const sleepTarget = 480; // Default 8h
+      const sportTarget = getVal('lifestyle') === 'Athlète' ? 90 : 45;
+
       setRings({
-        energy: Math.min(Math.round(((energyData?.total || 0) / 2500) * 100), 100),
-        sleep: Math.min(Math.round(((sleepData?.total || 0) / 480) * 100), 100),
-        sport: Math.min(Math.round(((sportData?.total || 0) / 60) * 100), 100),
+        energy: Math.min(Math.round(((energyData?.total || 0) / calorieTarget) * 100), 100),
+        sleep: Math.min(Math.round(((sleepData?.total || 0) / sleepTarget) * 100), 100),
+        sport: Math.min(Math.round(((sportData?.total || 0) / sportTarget) * 100), 100),
       });
 
     } catch (error) {
