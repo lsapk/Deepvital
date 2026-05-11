@@ -93,22 +93,39 @@ export class HealthService {
           for (const record of records) {
             let value = 0;
             let unit = '';
-
-            // Extract value based on record type
-            if ('value' in record) value = Number(record.value);
-            else if ('count' in record) value = Number(record.count);
-            else if ('energy' in record) {
-                value = Number(record.energy?.inCalories);
-                unit = 'kcal';
-            }
-            else if ('distance' in record) {
-                value = Number(record.distance?.inMeters);
-                unit = 'm';
-            }
-            else if ('level' in record) value = Number(record.level); // BloodGlucose
-            else if ('systolic' in record) value = Number(record.systolic); // simplified BP
-
             const recordTime = (record as any).startTime || (record as any).time;
+
+            // Type-specific extraction logic
+            if (type === 'HeartRate' && 'samples' in record) {
+              // Store multiple samples as individual logs to preserve resolution
+              for (const sample of (record as any).samples) {
+                await db.runAsync(
+                  'INSERT OR IGNORE INTO health_logs (type, value, unit, metadata, timestamp) VALUES (?, ?, ?, ?, ?)',
+                  [type, sample.beatsPerMinute, 'bpm', JSON.stringify(sample), sample.time]
+                );
+              }
+              continue;
+            } else if (type === 'SleepSession' && 'stages' in record) {
+              // For sleep, we store the total duration in minutes
+              const start = new Date((record as any).startTime).getTime();
+              const end = new Date((record as any).endTime).getTime();
+              value = (end - start) / (1000 * 60);
+              unit = 'min';
+            } else if ('value' in record) {
+              value = Number(record.value);
+            } else if ('count' in record) {
+              value = Number(record.count);
+            } else if ('energy' in record) {
+              value = Number(record.energy?.inCalories);
+              unit = 'kcal';
+            } else if ('distance' in record) {
+              value = Number(record.distance?.inMeters);
+              unit = 'm';
+            } else if ('level' in record) {
+              value = Number(record.level);
+            } else if ('systolic' in record) {
+              value = Number(record.systolic);
+            }
 
             await db.runAsync(
               'INSERT OR IGNORE INTO health_logs (type, value, unit, metadata, timestamp) VALUES (?, ?, ?, ?, ?)',

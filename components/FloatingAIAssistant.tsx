@@ -11,9 +11,6 @@ const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 export const FloatingAIAssistant = () => {
   const segments = useSegments();
   const [isOpen, setIsOpen] = useState(false);
-
-  const inAuthGroup = segments[0] === '(tabs)' || segments[0] === 'onboarding';
-  if (!inAuthGroup) return null;
   const [isExpanded, setIsExpanded] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<{ role: 'user' | 'ai', content: string }[]>([]);
@@ -21,19 +18,34 @@ export const FloatingAIAssistant = () => {
   const [isLocalMode, setIsLocalMode] = useState(false);
   const theme = useTheme();
 
+  const inAuthGroup = segments[0] === '(tabs)' || segments[0] === 'onboarding';
+
   useEffect(() => {
-    async function loadSettings() {
-      const db = await getDatabase();
-      const result = await db.getFirstAsync<{ value: string }>('SELECT value FROM app_settings WHERE key = ?', ['ai_local_mode']);
-      if (result) {
-        setIsLocalMode(result.value === 'true');
+    async function loadHistory() {
+      try {
+        const db = await getDatabase();
+        const settings = await db.getFirstAsync<{ value: string }>('SELECT value FROM app_settings WHERE key = ?', ['ai_local_mode']);
+        if (settings) {
+          setIsLocalMode(settings.value === 'true');
+        }
+
+        const history = await db.getAllAsync<{ role: 'user' | 'ai', content: string }>(
+          'SELECT role, content FROM ai_conversations ORDER BY timestamp ASC LIMIT 50'
+        );
+        if (history.length > 0) {
+          setMessages(history);
+        }
+      } catch (e) {
+        console.error("Failed to load AI history:", e);
       }
     }
-    if (isOpen) loadSettings();
+    if (isOpen) loadHistory();
   }, [isOpen]);
 
   const toggleOpen = () => setIsOpen(!isOpen);
   const toggleExpand = () => setIsExpanded(!isExpanded);
+
+  if (!inAuthGroup) return null;
 
   const sendMessage = async () => {
     if (!input.trim() || loading) return;

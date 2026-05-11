@@ -11,15 +11,27 @@ function RootLayoutNav() {
   const router = useRouter();
 
   useEffect(() => {
-    if (isLoading) return;
+    async function checkNavigation() {
+      if (isLoading) return;
 
-    const inAuthGroup = segments[0] === '(tabs)' || segments[0] === 'onboarding';
+      const db = await initDatabase().then(() => getDatabase());
+      const onboardingCompleted = await db.getFirstAsync<{ value: string }>('SELECT value FROM app_settings WHERE key = ?', ['onboarding_completed']);
 
-    if (!session && inAuthGroup) {
-      router.replace('/auth');
-    } else if (session && segments[0] === 'auth') {
-      router.replace('/onboarding');
+      const inAuthGroup = segments[0] === '(tabs)' || segments[0] === 'onboarding';
+
+      if (!session && inAuthGroup) {
+        router.replace('/auth');
+      } else if (session && segments[0] === 'auth') {
+        if (onboardingCompleted?.value === 'true') {
+          router.replace('/(tabs)/home');
+        } else {
+          router.replace('/onboarding');
+        }
+      } else if (session && segments[0] === 'onboarding' && onboardingCompleted?.value === 'true') {
+        router.replace('/(tabs)/home');
+      }
     }
+    checkNavigation().catch(console.error);
   }, [session, isLoading, segments]);
 
   return (
