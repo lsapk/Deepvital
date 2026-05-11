@@ -42,7 +42,9 @@ export class HealthService {
   static async syncData() {
     const db = await getDatabase();
     const now = new Date();
-    const startTime = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString(); // Last 30 days
+    // Get last sync date or default to 30 days ago
+    const lastSyncResult = await db.getFirstAsync<{ value: string }>('SELECT value FROM app_settings WHERE key = ?', ['last_health_sync']);
+    const startTime = lastSyncResult ? lastSyncResult.value : new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString();
     const endTime = now.toISOString();
 
     const recordTypes = [
@@ -60,22 +62,26 @@ export class HealthService {
           },
         });
 
-        // Store in SQLite
+        // Store in SQLite with OR IGNORE to avoid duplicates
         for (const record of records) {
-          // This is a simplified storage logic
           let value = 0;
           if ('value' in record) value = Number(record.value);
           else if ('count' in record) value = Number(record.count);
           else if ('energy' in record) value = Number(record.energy?.inCalories);
 
+          const recordTime = (record as any).startTime || (record as any).time;
+
           await db.runAsync(
-            'INSERT INTO health_logs (type, value, unit, metadata, timestamp) VALUES (?, ?, ?, ?, ?)',
-            [type, value, '', JSON.stringify(record), (record as any).startTime || (record as any).time]
+            'INSERT OR IGNORE INTO health_logs (type, value, unit, metadata, timestamp) VALUES (?, ?, ?, ?, ?)',
+            [type, value, '', JSON.stringify(record), recordTime]
           );
         }
       } catch (error) {
         console.error(`Error syncing ${type}:`, error);
       }
     }
+
+    // Update last sync timestamp
+    await db.runAsync('INSERT OR REPLACE INTO app_settings (key, value) VALUES (?, ?)', ['last_health_sync', endTime]);
   }
 }

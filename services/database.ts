@@ -17,7 +17,8 @@ export async function initDatabase() {
       question_id TEXT NOT NULL,
       answer TEXT NOT NULL,
       category TEXT,
-      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      CONSTRAINT unique_question UNIQUE (question_id)
     );
 
     CREATE TABLE IF NOT EXISTS health_logs (
@@ -26,7 +27,8 @@ export async function initDatabase() {
       value REAL NOT NULL,
       unit TEXT,
       metadata TEXT,
-      timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+      timestamp DATETIME NOT NULL,
+      CONSTRAINT unique_log UNIQUE (type, timestamp)
     );
 
     CREATE TABLE IF NOT EXISTS ai_conversations (

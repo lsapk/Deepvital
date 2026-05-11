@@ -4,6 +4,7 @@ import { initDatabase, getDatabase } from '@/services/database';
 import { useRouter, useSegments } from 'expo-router';
 import { FloatingAIAssistant } from '@/components/FloatingAIAssistant';
 import { View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function RootLayout() {
   const router = useRouter();
@@ -20,7 +21,7 @@ export default function RootLayout() {
       if (!result && inTabsGroup) {
         router.replace('/onboarding');
       } else if (result && segments[0] === 'onboarding') {
-        router.replace('/(tabs)');
+        router.replace('/(tabs)/home');
       }
     }
     setup();
@@ -29,12 +30,14 @@ export default function RootLayout() {
   const showFloatingAI = segments[0] === '(tabs)';
 
   return (
-    <View style={{ flex: 1 }}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-      </Stack>
-      {showFloatingAI && <FloatingAIAssistant />}
-    </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="onboarding" options={{ headerShown: false }} />
+        </Stack>
+        {showFloatingAI && <FloatingAIAssistant />}
+      </View>
+    </GestureHandlerRootView>
   );
 }

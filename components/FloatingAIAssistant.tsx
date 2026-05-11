@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, TextInput, FlatList, Keyboard
 import { Sparkles, Send, Maximize2, Minimize2, X } from 'lucide-react-native';
 import { AIService } from '@/services/ai';
 import { getDatabase } from '@/services/database';
+import { useTheme } from '@/constants/Colors';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -13,6 +14,7 @@ export const FloatingAIAssistant = () => {
   const [messages, setMessages] = useState<{ role: 'user' | 'ai', content: string }[]>([]);
   const [loading, setLoading] = useState(false);
   const [isLocalMode, setIsLocalMode] = useState(false);
+  const theme = useTheme();
 
   useEffect(() => {
     async function loadSettings() {
@@ -53,8 +55,8 @@ export const FloatingAIAssistant = () => {
 
   if (!isOpen) {
     return (
-      <TouchableOpacity style={styles.floatingButton} onPress={toggleOpen}>
-        <Sparkles color="#fff" size={28} />
+      <TouchableOpacity style={[styles.floatingButton, { backgroundColor: theme.text }]} onPress={toggleOpen}>
+        <Sparkles color={theme.background} size={28} />
       </TouchableOpacity>
     );
   }
@@ -64,23 +66,24 @@ export const FloatingAIAssistant = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={[
         styles.overlayPanel,
+        { backgroundColor: theme.surface, borderColor: theme.border },
         isExpanded ? styles.expandedPanel : styles.compactPanel
       ]}
     >
-      <View style={styles.panelHeader}>
+      <View style={[styles.panelHeader, { borderBottomColor: theme.border }]}>
         <View style={styles.headerLeft}>
-          <Sparkles color="#007AFF" size={20} />
+          <Sparkles color={theme.primary} size={20} />
           <View>
-            <Text style={styles.headerTitle}>DeepVital Assistant</Text>
-            <Text style={styles.headerSubtitle}>{isLocalMode ? 'Mode Local (100% Privé)' : 'Mode Performance (Gemini)'}</Text>
+            <Text style={[styles.headerTitle, { color: theme.text }]}>DeepVital Assistant</Text>
+            <Text style={[styles.headerSubtitle, { color: theme.secondaryText }]}>{isLocalMode ? 'Mode Local (100% Privé)' : 'Mode Performance (Gemini)'}</Text>
           </View>
         </View>
         <View style={styles.headerRight}>
           <TouchableOpacity onPress={toggleExpand} style={styles.headerIcon}>
-            {isExpanded ? <Minimize2 color="#8E8E93" size={20} /> : <Maximize2 color="#8E8E93" size={20} />}
+            {isExpanded ? <Minimize2 color={theme.secondaryText} size={20} /> : <Maximize2 color={theme.secondaryText} size={20} />}
           </TouchableOpacity>
           <TouchableOpacity onPress={toggleOpen} style={styles.headerIcon}>
-            <X color="#8E8E93" size={20} />
+            <X color={theme.secondaryText} size={20} />
           </TouchableOpacity>
         </View>
       </View>
@@ -92,27 +95,28 @@ export const FloatingAIAssistant = () => {
         renderItem={({ item }) => (
           <View style={[
             styles.messageBubble,
-            item.role === 'user' ? styles.userBubble : styles.aiBubble
+            item.role === 'user' ? [styles.userBubble, { backgroundColor: theme.primary }] : [styles.aiBubble, { backgroundColor: theme.border }]
           ]}>
             <Text style={[
               styles.messageText,
-              item.role === 'user' ? styles.userText : styles.aiText
+              item.role === 'user' ? styles.userText : { color: theme.text }
             ]}>{item.content}</Text>
           </View>
         )}
-        ListFooterComponent={loading ? <Text style={styles.loadingText}>DeepVital réfléchit...</Text> : null}
+        ListFooterComponent={loading ? <Text style={[styles.loadingText, { color: theme.secondaryText }]}>DeepVital réfléchit...</Text> : null}
       />
 
-      <View style={styles.inputArea}>
+      <View style={[styles.inputArea, { borderTopColor: theme.border }]}>
         <TextInput
-          style={styles.input}
+          style={[styles.input, { backgroundColor: theme.border, color: theme.text }]}
           placeholder="Posez une question..."
+          placeholderTextColor={theme.secondaryText}
           value={input}
           onChangeText={setInput}
           multiline
         />
-        <TouchableOpacity style={styles.sendButton} onPress={sendMessage} disabled={loading}>
-          <Send color="#fff" size={20} />
+        <TouchableOpacity style={[styles.sendButton, { backgroundColor: theme.text }]} onPress={sendMessage} disabled={loading}>
+          <Send color={theme.background} size={20} />
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
@@ -127,7 +131,6 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#1C1C1E',
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
@@ -140,7 +143,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 15,
     bottom: 85,
-    backgroundColor: '#FFFFFF',
     borderRadius: 24,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 10 },
@@ -149,7 +151,6 @@ const styles = StyleSheet.create({
     elevation: 10,
     overflow: 'hidden',
     borderWidth: 1,
-    borderColor: '#F2F2F7',
   },
   compactPanel: {
     width: 320,
@@ -166,7 +167,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#F2F2F7',
   },
   headerLeft: {
     flexDirection: 'row',
@@ -176,11 +176,9 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#1C1C1E',
   },
   headerSubtitle: {
     fontSize: 10,
-    color: '#8E8E93',
   },
   headerRight: {
     flexDirection: 'row',
@@ -199,12 +197,10 @@ const styles = StyleSheet.create({
     maxWidth: '85%',
   },
   userBubble: {
-    backgroundColor: '#007AFF',
     alignSelf: 'flex-end',
     borderBottomRightRadius: 4,
   },
   aiBubble: {
-    backgroundColor: '#F2F2F7',
     alignSelf: 'flex-start',
     borderBottomLeftRadius: 4,
   },
@@ -215,12 +211,8 @@ const styles = StyleSheet.create({
   userText: {
     color: '#FFFFFF',
   },
-  aiText: {
-    color: '#1C1C1E',
-  },
   loadingText: {
     fontSize: 12,
-    color: '#8E8E93',
     fontStyle: 'italic',
     textAlign: 'center',
     marginVertical: 10,
@@ -230,12 +222,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 12,
     borderTopWidth: 1,
-    borderTopColor: '#F2F2F7',
     gap: 10,
   },
   input: {
     flex: 1,
-    backgroundColor: '#F2F2F7',
     borderRadius: 20,
     paddingHorizontal: 15,
     paddingVertical: 8,
@@ -246,7 +236,6 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#1C1C1E',
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -1,36 +1,40 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Activity, Zap, Moon, Utensils, Heart, TrendingUp } from 'lucide-react-native';
+import { useTheme } from '@/constants/Colors';
 
-const HealthMetricCard = ({ title, value, unit, icon: Icon, color, correlation }: any) => (
-  <TouchableOpacity style={styles.metricCard}>
+const HealthMetricCard = ({ title, value, unit, icon: Icon, color, correlation, theme }: any) => (
+  <TouchableOpacity style={[styles.metricCard, { backgroundColor: theme.card }]}>
     <View style={styles.metricHeader}>
       <View style={[styles.iconContainer, { backgroundColor: color + '15' }]}>
         <Icon color={color} size={20} />
       </View>
-      <Text style={styles.metricTitle}>{title}</Text>
+      <Text style={[styles.metricTitle, { color: theme.secondaryText }]}>{title}</Text>
     </View>
     <View style={styles.metricBody}>
-      <Text style={styles.metricValue}>{value}</Text>
-      <Text style={styles.metricUnit}>{unit}</Text>
+      <Text style={[styles.metricValue, { color: theme.text }]}>{value}</Text>
+      <Text style={[styles.metricUnit, { color: theme.secondaryText }]}>{unit}</Text>
     </View>
     {correlation && (
-      <View style={styles.correlationBadge}>
-        <TrendingUp color="#4CD964" size={14} />
-        <Text style={styles.correlationText}>{correlation}</Text>
+      <View style={[styles.correlationBadge, { backgroundColor: theme.primary + '10' }]}>
+        <TrendingUp color={theme.primary} size={14} />
+        <Text style={[styles.correlationText, { color: theme.primary }]}>{correlation}</Text>
       </View>
     )}
   </TouchableOpacity>
 );
 
 export default function HealthScreen() {
+  const theme = useTheme();
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]} edges={['top']}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Text style={styles.headerTitle}>LE LABORATOIRE</Text>
+        <Text style={[styles.headerTitle, { color: theme.text }]}>LE LABORATOIRE</Text>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Analyse de Corrélation</Text>
+          <Text style={[styles.sectionTitle, { color: theme.text }]}>Analyse de Corrélation</Text>
           <View style={styles.metricsGrid}>
             <HealthMetricCard
               title="Sommeil & Activité"
@@ -39,6 +43,7 @@ export default function HealthScreen() {
               icon={Moon}
               color="#5856D6"
               correlation="+15% qualité"
+              theme={theme}
             />
             <HealthMetricCard
               title="BPM & Stress"
@@ -47,6 +52,7 @@ export default function HealthScreen() {
               icon={Heart}
               color="#FF2D55"
               correlation="-5% vs hier"
+              theme={theme}
             />
             <HealthMetricCard
               title="V02 Max"
@@ -54,6 +60,7 @@ export default function HealthScreen() {
               unit="ml/kg"
               icon={Zap}
               color="#FF9500"
+              theme={theme}
             />
             <HealthMetricCard
               title="Nutrition"
@@ -61,26 +68,27 @@ export default function HealthScreen() {
               unit="kcal"
               icon={Utensils}
               color="#4CD964"
+              theme={theme}
             />
           </View>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Plans d'Action IA</Text>
-          <TouchableOpacity style={styles.actionPlanCard}>
+          <Text style={[styles.sectionTitle, { color: theme.text }]}>Plans d'Action IA</Text>
+          <TouchableOpacity style={[styles.actionPlanCard, { backgroundColor: theme.card }]}>
             <View style={styles.actionPlanContent}>
-              <Text style={styles.actionPlanTitle}>Protocole Sommeil Profond</Text>
-              <Text style={styles.actionPlanDesc}>Basé sur votre baisse de magnésium et votre activité tardive.</Text>
+              <Text style={[styles.actionPlanTitle, { color: theme.text }]}>Protocole Sommeil Profond</Text>
+              <Text style={[styles.actionPlanDesc, { color: theme.secondaryText }]}>Basé sur votre baisse de magnésium et votre activité tardive.</Text>
             </View>
             <Zap color="#FFCC00" size={24} fill="#FFCC00" />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.actionPlanCard}>
+          <TouchableOpacity style={[styles.actionPlanCard, { backgroundColor: theme.card }]}>
             <View style={styles.actionPlanContent}>
-              <Text style={styles.actionPlanTitle}>Rééquilibrage Métabolique</Text>
-              <Text style={styles.actionPlanDesc}>Optimisation de l'apport en glucides pour vos séances de cardio.</Text>
+              <Text style={[styles.actionPlanTitle, { color: theme.text }]}>Rééquilibrage Métabolique</Text>
+              <Text style={[styles.actionPlanDesc, { color: theme.secondaryText }]}>Optimisation de l'apport en glucides pour vos séances de cardio.</Text>
             </View>
-            <Activity color="#007AFF" size={24} />
+            <Activity color={theme.primary} size={24} />
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -91,7 +99,6 @@ export default function HealthScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FBF9F6',
   },
   scrollContent: {
     padding: 20,
@@ -99,7 +106,6 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#1C1C1E',
     letterSpacing: 1,
     marginBottom: 20,
   },
@@ -109,7 +115,6 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1C1C1E',
     marginBottom: 15,
   },
   metricsGrid: {
@@ -119,7 +124,6 @@ const styles = StyleSheet.create({
   },
   metricCard: {
     width: '47%',
-    backgroundColor: '#FFFFFF',
     borderRadius: 20,
     padding: 16,
     shadowColor: '#000',
@@ -144,7 +148,6 @@ const styles = StyleSheet.create({
   metricTitle: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#8E8E93',
   },
   metricBody: {
     flexDirection: 'row',
@@ -154,17 +157,14 @@ const styles = StyleSheet.create({
   metricValue: {
     fontSize: 24,
     fontWeight: '700',
-    color: '#1C1C1E',
   },
   metricUnit: {
     fontSize: 14,
-    color: '#8E8E93',
     fontWeight: '500',
   },
   correlationBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F2FFF5',
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 8,
@@ -174,13 +174,11 @@ const styles = StyleSheet.create({
   },
   correlationText: {
     fontSize: 10,
-    color: '#4CD964',
     fontWeight: '700',
   },
   actionPlanCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
     borderRadius: 20,
     padding: 20,
     marginBottom: 12,
@@ -196,12 +194,10 @@ const styles = StyleSheet.create({
   actionPlanTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1C1C1E',
     marginBottom: 4,
   },
   actionPlanDesc: {
     fontSize: 13,
-    color: '#8E8E93',
     lineHeight: 18,
   },
 });

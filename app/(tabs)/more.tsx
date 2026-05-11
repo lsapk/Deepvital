@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity, SafeAreaView, Switch } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity, Switch } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { User, Shield, Zap, Settings, ChevronRight, Info } from 'lucide-react-native';
 import { getDatabase } from '@/services/database';
+import { useTheme } from '@/constants/Colors';
 
-const SettingItem = ({ icon: Icon, title, value, type = 'link', onValueChange }: any) => (
-  <TouchableOpacity style={styles.settingItem} disabled={type === 'switch'}>
+const SettingItem = ({ icon: Icon, title, value, type = 'link', onValueChange, theme }: any) => (
+  <TouchableOpacity style={[styles.settingItem, { borderBottomColor: theme.border }]} disabled={type === 'switch'}>
     <View style={styles.settingLeft}>
-      <View style={styles.iconContainer}>
-        <Icon color="#1C1C1E" size={20} />
+      <View style={[styles.iconContainer, { backgroundColor: theme.border }]}>
+        <Icon color={theme.text} size={20} />
       </View>
-      <Text style={styles.settingTitle}>{title}</Text>
+      <Text style={[styles.settingTitle, { color: theme.text }]}>{title}</Text>
     </View>
     <View style={styles.settingRight}>
-      {type === 'link' && <ChevronRight color="#C7C7CC" size={20} />}
+      {type === 'link' && <ChevronRight color={theme.secondaryText} size={20} />}
       {type === 'switch' && (
         <Switch
           value={value}
@@ -20,13 +22,14 @@ const SettingItem = ({ icon: Icon, title, value, type = 'link', onValueChange }:
           trackColor={{ false: '#D1D1D6', true: '#4CD964' }}
         />
       )}
-      {type === 'text' && <Text style={styles.settingValueText}>{value}</Text>}
+      {type === 'text' && <Text style={[styles.settingValueText, { color: theme.secondaryText }]}>{value}</Text>}
     </View>
   </TouchableOpacity>
 );
 
 export default function MoreScreen() {
   const [isLocalIA, setIsLocalIA] = useState(false);
+  const theme = useTheme();
 
   useEffect(() => {
     async function load() {
@@ -44,55 +47,58 @@ export default function MoreScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]} edges={['top']}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Text style={styles.headerTitle}>PARAMÈTRES</Text>
+        <Text style={[styles.headerTitle, { color: theme.text }]}>PARAMÈTRES</Text>
 
-        <View style={styles.profileSection}>
+        <View style={[styles.profileSection, { backgroundColor: theme.card }]}>
           <View style={styles.profileInfo}>
-            <View style={styles.avatarLarge}>
-              <User color="#8E8E93" size={40} />
+            <View style={[styles.avatarLarge, { backgroundColor: theme.border }]}>
+              <User color={theme.secondaryText} size={40} />
             </View>
             <View>
-              <Text style={styles.userName}>Utilisateur Oasis</Text>
-              <Text style={styles.userBio}>Optimisation Longévité</Text>
+              <Text style={[styles.userName, { color: theme.text }]}>Utilisateur DeepVital</Text>
+              <Text style={[styles.userBio, { color: theme.secondaryText }]}>Optimisation Longévité</Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.editButton}>
-            <Text style={styles.editButtonText}>Modifier le profil</Text>
+          <TouchableOpacity style={[styles.editButton, { backgroundColor: theme.border }]}>
+            <Text style={[styles.editButtonText, { color: theme.text }]}>Modifier le profil</Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionLabel}>INTELLIGENCE ARTIFICIELLE</Text>
-          <View style={styles.settingsGroup}>
+          <Text style={[styles.sectionLabel, { color: theme.secondaryText }]}>INTELLIGENCE ARTIFICIELLE</Text>
+          <View style={[styles.settingsGroup, { backgroundColor: theme.card }]}>
             <SettingItem
               icon={Shield}
               title="Mode Confidentialité (IA Locale)"
               type="switch"
               value={isLocalIA}
               onValueChange={toggleLocalIA}
+              theme={theme}
             />
             <SettingItem
               icon={Zap}
               title="Modèle"
               type="text"
               value={isLocalIA ? "Llama 3.2 1B" : "Gemini 1.5 Flash"}
+              theme={theme}
             />
             <SettingItem
               icon={Settings}
               title="Personnalité du Coach"
               type="text"
               value="Scientifique"
+              theme={theme}
             />
           </View>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionLabel}>DONNÉES & SOURCES</Text>
-          <View style={styles.settingsGroup}>
-            <SettingItem icon={Shield} title="Santé Connect" type="text" value="Connecté" />
-            <SettingItem icon={Info} title="Exporter mes données (JSON)" />
+          <Text style={[styles.sectionLabel, { color: theme.secondaryText }]}>DONNÉES & SOURCES</Text>
+          <View style={[styles.settingsGroup, { backgroundColor: theme.card }]}>
+            <SettingItem icon={Shield} title="Santé Connect" type="text" value="Connecté" theme={theme} />
+            <SettingItem icon={Info} title="Exporter mes données (JSON)" theme={theme} />
           </View>
         </View>
 
@@ -107,7 +113,6 @@ export default function MoreScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FBF9F6',
   },
   scrollContent: {
     padding: 20,
@@ -115,12 +120,10 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#1C1C1E',
     letterSpacing: 1,
     marginBottom: 20,
   },
   profileSection: {
-    backgroundColor: '#FFFFFF',
     borderRadius: 24,
     padding: 20,
     marginBottom: 24,
@@ -137,21 +140,17 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: '#F2F2F7',
     alignItems: 'center',
     justifyContent: 'center',
   },
   userName: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#1C1C1E',
   },
   userBio: {
     fontSize: 14,
-    color: '#8E8E93',
   },
   editButton: {
-    backgroundColor: '#F2F2F7',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 20,
@@ -161,7 +160,6 @@ const styles = StyleSheet.create({
   editButtonText: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#1C1C1E',
   },
   section: {
     marginBottom: 24,
@@ -169,13 +167,11 @@ const styles = StyleSheet.create({
   sectionLabel: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#8E8E93',
     marginLeft: 10,
     marginBottom: 8,
     letterSpacing: 0.5,
   },
   settingsGroup: {
-    backgroundColor: '#FFFFFF',
     borderRadius: 20,
     overflow: 'hidden',
   },
@@ -185,7 +181,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#F2F2F7',
   },
   settingLeft: {
     flexDirection: 'row',
@@ -196,14 +191,12 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 8,
-    backgroundColor: '#F2F2F7',
     alignItems: 'center',
     justifyContent: 'center',
   },
   settingTitle: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#1C1C1E',
   },
   settingRight: {
     flexDirection: 'row',
@@ -212,7 +205,6 @@ const styles = StyleSheet.create({
   },
   settingValueText: {
     fontSize: 14,
-    color: '#8E8E93',
   },
   logoutButton: {
     marginTop: 10,
