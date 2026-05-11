@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, TextInput, FlatList, KeyboardAvoidingView, Platform, Dimensions, ActivityIndicator } from 'react-native';
 import { Sparkles, Send, Maximize2, Minimize2, X } from 'lucide-react-native';
+import { useSegments } from 'expo-router';
 import { AIService } from '@/services/ai';
 import { getDatabase } from '@/services/database';
 import { useTheme } from '@/constants/Colors';
@@ -8,7 +9,11 @@ import { useTheme } from '@/constants/Colors';
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 export const FloatingAIAssistant = () => {
+  const segments = useSegments();
   const [isOpen, setIsOpen] = useState(false);
+
+  const inAuthGroup = segments[0] === '(tabs)' || segments[0] === 'onboarding';
+  if (!inAuthGroup) return null;
   const [isExpanded, setIsExpanded] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<{ role: 'user' | 'ai', content: string }[]>([]);

@@ -15,7 +15,7 @@ export class HealthService {
       return await getSdkStatus();
     } catch (e) {
       console.warn("Health Connect not available on this device");
-      return 3; // SDK_UNAVAILABLE
+      return 3;
     }
   }
 
@@ -50,6 +50,11 @@ export class HealthService {
         { accessType: 'read', recordType: 'Steps' },
         { accessType: 'read', recordType: 'Vo2Max' },
         { accessType: 'read', recordType: 'Weight' },
+        { accessType: 'read', recordType: 'BloodGlucose' },
+        { accessType: 'read', recordType: 'BloodPressure' },
+        { accessType: 'read', recordType: 'BodyTemperature' },
+        { accessType: 'read', recordType: 'RestingHeartRate' },
+        { accessType: 'read', recordType: 'HeartRateVariabilityRmssd' },
       ]);
     } catch (e) {
       console.error("Permission request failed:", e);
@@ -63,12 +68,16 @@ export class HealthService {
       const db = await getDatabase();
       const now = new Date();
       const lastSyncResult = await db.getFirstAsync<{ value: string }>('SELECT value FROM app_settings WHERE key = ?', ['last_health_sync']);
+
+      // Default: Sync last 30 days if never synced
       const startTime = lastSyncResult ? lastSyncResult.value : new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString();
       const endTime = now.toISOString();
 
       const recordTypes = [
         'HeartRate', 'Steps', 'ActiveCaloriesBurned', 'SleepSession',
-        'OxygenSaturation', 'Vo2Max', 'Weight', 'Height'
+        'OxygenSaturation', 'Vo2Max', 'Weight', 'Height', 'Distance',
+        'BasalMetabolicRate', 'BodyFat', 'Nutrition', 'BloodGlucose',
+        'BloodPressure', 'RestingHeartRate', 'HeartRateVariabilityRmssd'
       ] as const;
 
       for (const type of recordTypes) {
@@ -83,19 +92,31 @@ export class HealthService {
 
           for (const record of records) {
             let value = 0;
+            let unit = '';
+
+            // Extract value based on record type
             if ('value' in record) value = Number(record.value);
             else if ('count' in record) value = Number(record.count);
-            else if ('energy' in record) value = Number(record.energy?.inCalories);
+            else if ('energy' in record) {
+                value = Number(record.energy?.inCalories);
+                unit = 'kcal';
+            }
+            else if ('distance' in record) {
+                value = Number(record.distance?.inMeters);
+                unit = 'm';
+            }
+            else if ('level' in record) value = Number(record.level); // BloodGlucose
+            else if ('systolic' in record) value = Number(record.systolic); // simplified BP
 
             const recordTime = (record as any).startTime || (record as any).time;
 
             await db.runAsync(
               'INSERT OR IGNORE INTO health_logs (type, value, unit, metadata, timestamp) VALUES (?, ?, ?, ?, ?)',
-              [type, value, '', JSON.stringify(record), recordTime]
+              [type, value, unit, JSON.stringify(record), recordTime]
             );
           }
         } catch (error) {
-          console.error(`Error syncing ${type}:`, error);
+          console.warn(`Sync failed for ${type}:`, error);
         }
       }
 
