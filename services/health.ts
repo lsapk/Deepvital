@@ -10,17 +10,17 @@ import { getDatabase } from './database';
 
 export class HealthService {
   static async checkStatus() {
-    if (Platform.OS !== 'android') return SdkStatus.SDK_UNAVAILABLE;
+    if (Platform.OS !== 'android' || !SdkStatus) return 3; // 3 is SDK_UNAVAILABLE
     try {
       return await getSdkStatus();
     } catch (e) {
       console.warn("Health Connect not available on this device");
-      return SdkStatus.SDK_UNAVAILABLE;
+      return 3; // SDK_UNAVAILABLE
     }
   }
 
   static async setup() {
-    if (Platform.OS !== 'android') return false;
+    if (Platform.OS !== 'android' || !SdkStatus || !initialize) return false;
     try {
       const status = await this.checkStatus();
       if (status === SdkStatus.SDK_AVAILABLE) {

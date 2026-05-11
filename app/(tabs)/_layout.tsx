@@ -10,15 +10,32 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: theme.text,
+        tabBarActiveTintColor: theme.primary,
         tabBarInactiveTintColor: theme.secondaryText,
         tabBarStyle: {
           backgroundColor: theme.surface,
           borderTopWidth: 0,
-          elevation: 0,
-          height: Platform.OS === 'ios' ? 88 : 65,
-          paddingBottom: Platform.OS === 'ios' ? 30 : 10,
-          paddingTop: 10,
+          elevation: 8,
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: -4 },
+          shadowOpacity: 0.1,
+          shadowRadius: 12,
+          height: Platform.OS === 'ios' ? 95 : 75,
+          paddingBottom: Platform.OS === 'ios' ? 35 : 15,
+          paddingTop: 12,
+          position: 'absolute',
+          bottom: 20,
+          left: 20,
+          right: 20,
+          borderRadius: 25,
+          borderWidth: 1,
+          borderColor: theme.border,
+        },
+        tabBarLabelStyle: {
+          fontFamily: 'System',
+          fontWeight: '600',
+          fontSize: 10,
+          marginBottom: 4,
         },
         headerShown: false,
       }}>

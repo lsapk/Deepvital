@@ -1,5 +1,5 @@
 
-> app@1.0.0 web
+> app@1.0.0 start
 > expo start --web
 
 Starting project at /app
@@ -7,29 +7,11 @@ Starting Metro Bundler
 Waiting on http://localhost:8081
 Logs for your project will appear below.
 Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-Web node_modules/expo-router/entry.js ▓▓▓░░░░░░░░░░░░░ 19.8% (19/99)
-λ node_modules/expo-router/node/render.js ▓▓░░░░░░░░░░░░░░ 17.0% (119/289)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓░░░░░░░░░ 44.6% (194/311)
-λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓░░░░░░░ 59.5% (385/499)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓░░░░░░░░░ 49.2% (287/409)
-λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓░░░░░ 71.9% ( 491/2278)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓░░░░░░░░ 53.4% (380/520)
-λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓░░░░░ 71.9% (1167/2366)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓░░░░░░░░ 53.4% (380/520)
-λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 86.1% (2195/2366)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓░░░░░░ 65.4% ( 486/2296)
-λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 93.1% (2331/2443)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓░░░░░░ 65.4% (1438/2402)
-λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 93.1% (2408/2620)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 91.9% (2340/2453)
-λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 93.1% (2451/2721)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 92.7% (2470/2690)
-λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 93.1% (2731/2885)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 92.7% (2652/2846)
-λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 94.0% (2857/2947)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 94.1% (3052/3147)
-λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 96.5% (3000/3054)
-λ Bundling failed 40839ms node_modules/expo-router/node/render.js (3149 modules)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 88.6% (705/749)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓░░░░ 81.0% (715/809)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 96.4% ( 888/2680)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 96.3% (2982/3038)
+λ Bundling failed 8496ms node_modules/expo-router/node/render.js (3110 modules)
 
 Metro error: Unable to resolve module ./wa-sqlite/wa-sqlite.wasm from /app/node_modules/expo-sqlite/web/worker.ts:
 
@@ -64,19 +46,15 @@ Import stack:
  services/database.ts
  | import "expo-sqlite"
 
- components/FloatingAIAssistant.tsx
- | import "@/services/database"
-
  app/_layout.tsx
- | import "@/components/FloatingAIAssistant"
+ | import "@/services/database"
 
  app (require.context)
 
 
 Call Stack
   <unknown> (node_modules/expo-sqlite/web/worker.ts:0)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 98.7% (3274/3295)
-Error: Premature close
-    at onclose (node:internal/streams/end-of-stream:171:30)
-    at processTicksAndRejections (node:internal/process/task_queues:84:11)
-Web Bundled 41812ms node_modules/expo-router/entry.js (3316 modules)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 97.7% (3266/3305)
+Web Bundled 8860ms node_modules/expo-router/entry.js (3328 modules)
+Web Bundled 951ms node_modules/expo-router/_error.js (322 modules)
+ LOG  [web] Logs will appear in the browser console
