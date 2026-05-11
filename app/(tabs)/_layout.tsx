@@ -2,6 +2,7 @@ import React from 'react';
 import { Tabs } from 'expo-router';
 import { Home, Heart, Settings } from 'lucide-react-native';
 import { useTheme } from '@/constants/Colors';
+import { Platform } from 'react-native';
 
 export default function TabLayout() {
   const theme = useTheme();
@@ -15,8 +16,9 @@ export default function TabLayout() {
           backgroundColor: theme.surface,
           borderTopWidth: 0,
           elevation: 0,
-          height: 60,
-          paddingBottom: 10,
+          height: Platform.OS === 'ios' ? 88 : 65,
+          paddingBottom: Platform.OS === 'ios' ? 30 : 10,
+          paddingTop: 10,
         },
         headerShown: false,
       }}>
