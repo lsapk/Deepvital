@@ -1,0 +1,864 @@
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/Candles.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/Candles.js
+index 3b0b84f..349db17 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/Candles.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/Candles.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.CandlestickChartCandles = CandlestickChartCandles;
+ var _react = _interopRequireDefault(require("react"));
+ var _reactNativeSvg = require("react-native-svg");
+ var _Chart = require("./Chart");
+@@ -52,4 +51,5 @@ function CandlestickChartCandles({
+     index: index
+   }, candleProps))));
+ }
++exports.CandlestickChartCandles = CandlestickChartCandles;
+ //# sourceMappingURL=Candles.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/Chart.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/Chart.js
+index 75139e8..992c6b1 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/Chart.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/Chart.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.CandlestickChart = CandlestickChart;
+ exports.CandlestickChartDimensionsContext = void 0;
+ var _react = _interopRequireDefault(require("react"));
+ var _reactNative = require("react-native");
+@@ -38,4 +37,5 @@ function CandlestickChart({
+     value: contextValue
+   }, /*#__PURE__*/_react.default.createElement(_reactNative.View, props, children));
+ }
++exports.CandlestickChart = CandlestickChart;
+ //# sourceMappingURL=Chart.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/Context.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/Context.js
+index 0b61c37..e7485df 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/Context.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/Context.js
+@@ -4,7 +4,6 @@ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+ exports.CandlestickChartContext = void 0;
+-exports.CandlestickChartProvider = CandlestickChartProvider;
+ var _react = _interopRequireDefault(require("react"));
+ var _reactNativeReanimated = require("react-native-reanimated");
+ var _utils = require("./utils");
+@@ -62,4 +61,5 @@ function CandlestickChartProvider({
+   }, children);
+ }
+ CandlestickChartProvider.displayName = 'CandlestickChartProvider';
++exports.CandlestickChartProvider = CandlestickChartProvider;
+ //# sourceMappingURL=Context.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/Crosshair.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/Crosshair.js
+index 20406ab..c6347e0 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/Crosshair.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/Crosshair.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.CandlestickChartCrosshair = CandlestickChartCrosshair;
+ var _react = _interopRequireDefault(require("react"));
+ var _reactNative = require("react-native");
+ var _reactNativeGestureHandler = require("react-native-gesture-handler");
+@@ -113,4 +112,5 @@ function CandlestickChartCrosshair({
+     }
+   }, children))));
+ }
++exports.CandlestickChartCrosshair = CandlestickChartCrosshair;
+ //# sourceMappingURL=Crosshair.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/CrosshairTooltip.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/CrosshairTooltip.js
+index d28904c..dd24e3c 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/CrosshairTooltip.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/CrosshairTooltip.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.CandlestickChartCrosshairTooltip = CandlestickChartCrosshairTooltip;
+ exports.CandlestickChartCrosshairTooltipContext = void 0;
+ var _react = _interopRequireDefault(require("react"));
+ var _reactNative = require("react-native");
+@@ -85,4 +84,5 @@ const styles = _reactNative.StyleSheet.create({
+     fontSize: 14
+   }
+ });
++exports.CandlestickChartCrosshairTooltip = CandlestickChartCrosshairTooltip;
+ //# sourceMappingURL=CrosshairTooltip.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/DatetimeText.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/DatetimeText.js
+index 30c21ed..df9c875 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/DatetimeText.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/DatetimeText.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.CandlestickChartDatetimeText = CandlestickChartDatetimeText;
+ var _react = _interopRequireDefault(require("react"));
+ var _useDatetime = require("./useDatetime");
+ var _AnimatedText = require("../../components/AnimatedText");
+@@ -25,4 +24,5 @@ function CandlestickChartDatetimeText({
+     style: style
+   });
+ }
++exports.CandlestickChartDatetimeText = CandlestickChartDatetimeText;
+ //# sourceMappingURL=DatetimeText.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/PriceText.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/PriceText.js
+index 895631e..e49aff3 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/PriceText.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/PriceText.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.CandlestickChartPriceText = CandlestickChartPriceText;
+ var _react = _interopRequireDefault(require("react"));
+ var _usePrice = require("./usePrice");
+ var _AnimatedText = require("../../components/AnimatedText");
+@@ -25,4 +24,5 @@ function CandlestickChartPriceText({
+     style: style
+   });
+ }
++exports.CandlestickChartPriceText = CandlestickChartPriceText;
+ //# sourceMappingURL=PriceText.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/useCandleData.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/useCandleData.js
+index d9142c0..a0e2a06 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/useCandleData.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/useCandleData.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.useCandleData = useCandleData;
+ var _reactNativeReanimated = require("react-native-reanimated");
+ var _useCandlestickChart = require("./useCandlestickChart");
+ function useCandleData() {
+@@ -26,4 +25,5 @@ function useCandleData() {
+   }, [currentX, data, step]);
+   return candle;
+ }
++exports.useCandleData = useCandleData;
+ //# sourceMappingURL=useCandleData.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/useCandlestickChart.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/useCandlestickChart.js
+index faf62fc..c4835da 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/useCandlestickChart.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/useCandlestickChart.js
+@@ -3,11 +3,11 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.useCandlestickChart = useCandlestickChart;
+ var _react = _interopRequireDefault(require("react"));
+ var _Context = require("./Context");
+ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+ function useCandlestickChart() {
+   return _react.default.useContext(_Context.CandlestickChartContext);
+ }
++exports.useCandlestickChart = useCandlestickChart;
+ //# sourceMappingURL=useCandlestickChart.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/useDatetime.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/useDatetime.js
+index 6d490ce..8f3ea8a 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/useDatetime.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/useDatetime.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.useCandlestickChartDatetime = useCandlestickChartDatetime;
+ var _reactNativeReanimated = require("react-native-reanimated");
+ var _utils = require("../../utils");
+ var _useCandleData = require("./useCandleData");
+@@ -37,4 +36,5 @@ function useCandlestickChartDatetime({
+     formatted
+   };
+ }
++exports.useCandlestickChartDatetime = useCandlestickChartDatetime;
+ //# sourceMappingURL=useDatetime.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/usePrice.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/usePrice.js
+index 9dd2182..7c2687b 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/usePrice.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/usePrice.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.useCandlestickChartPrice = useCandlestickChartPrice;
+ var _reactNativeReanimated = require("react-native-reanimated");
+ var _utils = require("../../utils");
+ var _useCandlestickChart = require("./useCandlestickChart");
+@@ -49,4 +48,5 @@ function useCandlestickChartPrice({
+     formatted
+   };
+ }
++exports.useCandlestickChartPrice = useCandlestickChartPrice;
+ //# sourceMappingURL=usePrice.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getDomain.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getDomain.js
+index ff1a166..5e07973 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getDomain.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getDomain.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.getDomain = getDomain;
+ function getDomain(rows) {
+   'worklet';
+
+@@ -16,4 +15,5 @@ function getDomain(rows) {
+   const max = Math.max(...values);
+   return [min - (max - min) * 0.025, max + (max - min) * 0.025];
+ }
++exports.getDomain = getDomain;
+ //# sourceMappingURL=getDomain.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getHeight.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getHeight.js
+index 07e1214..3a731de 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getHeight.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getHeight.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.getHeight = getHeight;
+ var _reactNativeReanimated = require("react-native-reanimated");
+ function getHeight({
+   value,
+@@ -14,4 +13,5 @@ function getHeight({
+
+   return (0, _reactNativeReanimated.interpolate)(value, [0, Math.max(...domain) - Math.min(...domain)], [0, maxHeight], _reactNativeReanimated.Extrapolation.CLAMP);
+ }
++exports.getHeight = getHeight;
+ //# sourceMappingURL=getHeight.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getPrice.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getPrice.js
+index 4f3fde0..8d70ede 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getPrice.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getPrice.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.getPrice = getPrice;
+ var _reactNativeReanimated = require("react-native-reanimated");
+ function getPrice({
+   y,
+@@ -15,4 +14,5 @@ function getPrice({
+   if (y === -1) return -1;
+   return (0, _reactNativeReanimated.interpolate)(y, [0, maxHeight], domain.reverse(), _reactNativeReanimated.Extrapolation.CLAMP);
+ }
++exports.getPrice = getPrice;
+ //# sourceMappingURL=getPrice.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getY.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getY.js
+index 4e01796..b041114 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getY.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getY.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.getY = getY;
+ var _reactNativeReanimated = require("react-native-reanimated");
+ function getY({
+   value,
+@@ -14,4 +13,5 @@ function getY({
+
+   return (0, _reactNativeReanimated.interpolate)(value, domain, [maxHeight, 0], _reactNativeReanimated.Extrapolation.CLAMP);
+ }
++exports.getY = getY;
+ //# sourceMappingURL=getY.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Chart.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Chart.js
+index 8b46c20..9c308dc 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Chart.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Chart.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.LineChart = LineChart;
+ exports.LineChartDimensionsContext = void 0;
+ var _react = _interopRequireDefault(require("react"));
+ var d3Shape = _interopRequireWildcard(require("d3-shape"));
+@@ -115,4 +114,5 @@ const styles = _reactNative.StyleSheet.create({
+     position: 'absolute'
+   }
+ });
++exports.LineChart = LineChart;
+ //# sourceMappingURL=Chart.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/ChartPath.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/ChartPath.js
+index 8d1b08b..3643dd0 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/ChartPath.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/ChartPath.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.LineChartPathWrapper = LineChartPathWrapper;
+ var _react = _interopRequireDefault(require("react"));
+ var _reactNative = require("react-native");
+ var _reactNativeSvg = require("react-native-svg");
+@@ -150,4 +149,5 @@ function LineChartPathWrapper({
+     style: _reactNative.StyleSheet.absoluteFill
+   }, foregroundChildren)))));
+ }
++exports.LineChartPathWrapper = LineChartPathWrapper;
+ //# sourceMappingURL=ChartPath.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Context.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Context.js
+index 84eca8e..55a5a85 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Context.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Context.js
+@@ -4,7 +4,6 @@ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+ exports.LineChartContext = void 0;
+-exports.LineChartProvider = LineChartProvider;
+ var _react = _interopRequireWildcard(require("react"));
+ var _reactNativeReanimated = require("react-native-reanimated");
+ var _Data = require("./Data");
+@@ -71,4 +70,5 @@ function LineChartProvider({
+   }, children));
+ }
+ LineChartProvider.displayName = 'LineChartProvider';
++exports.LineChartProvider = LineChartProvider;
+ //# sourceMappingURL=Context.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Cursor.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Cursor.js
+index b7ad498..181b561 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Cursor.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Cursor.js
+@@ -4,7 +4,6 @@ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+ exports.CursorContext = void 0;
+-exports.LineChartCursor = LineChartCursor;
+ var _react = _interopRequireWildcard(require("react"));
+ var _reactNativeReanimated = _interopRequireWildcard(require("react-native-reanimated"));
+ var _reactNativeGestureHandler = require("react-native-gesture-handler");
+@@ -136,4 +135,5 @@ function LineChartCursor({
+     style: _reactNative.StyleSheet.absoluteFill
+   }, children)));
+ }
++exports.LineChartCursor = LineChartCursor;
+ //# sourceMappingURL=Cursor.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/CursorCrosshair.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/CursorCrosshair.js
+index abfe4f3..eeb7ed5 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/CursorCrosshair.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/CursorCrosshair.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.LineChartCursorCrosshair = LineChartCursorCrosshair;
+ var _react = _interopRequireDefault(require("react"));
+ var _reactNative = require("react-native");
+ var _reactNativeReanimated = _interopRequireWildcard(require("react-native-reanimated"));
+@@ -89,4 +88,5 @@ const styles = _reactNative.StyleSheet.create({
+     position: 'absolute'
+   }
+ });
++exports.LineChartCursorCrosshair = LineChartCursorCrosshair;
+ //# sourceMappingURL=CursorCrosshair.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/CursorLine.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/CursorLine.js
+index 2b16412..ce4db4e 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/CursorLine.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/CursorLine.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.LineChartCursorLine = LineChartCursorLine;
+ var _react = _interopRequireDefault(require("react"));
+ var _reactNative = require("react-native");
+ var _reactNativeReanimated = _interopRequireWildcard(require("react-native-reanimated"));
+@@ -180,4 +179,5 @@ const styles = _reactNative.StyleSheet.create({
+     height: '100%'
+   }
+ });
++exports.LineChartCursorLine = LineChartCursorLine;
+ //# sourceMappingURL=CursorLine.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Data.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Data.js
+index eace0fa..6c926e8 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Data.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Data.js
+@@ -4,9 +4,6 @@ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+ exports.DefaultLineChartId = void 0;
+-exports.LineChartDataProvider = LineChartDataProvider;
+-exports.LineChartIdProvider = LineChartIdProvider;
+-exports.useLineChartData = useLineChartData;
+ exports.useLineChartId = void 0;
+ var _react = _interopRequireWildcard(require("react"));
+ function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
+@@ -71,4 +68,7 @@ ${suggestion}
+     `);
+   }
+ }
++exports.LineChartDataProvider = LineChartDataProvider;
++exports.LineChartIdProvider = LineChartIdProvider;
++exports.useLineChartData = useLineChartData;
+ //# sourceMappingURL=Data.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/DatetimeText.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/DatetimeText.js
+index 6b8956d..0d5755a 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/DatetimeText.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/DatetimeText.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.LineChartDatetimeText = LineChartDatetimeText;
+ var _react = _interopRequireDefault(require("react"));
+ var _reactNativeReanimated = require("react-native-reanimated");
+ var _useDatetime = require("./useDatetime");
+@@ -34,4 +33,5 @@ function LineChartDatetimeText({
+     style: style
+   });
+ }
++exports.LineChartDatetimeText = LineChartDatetimeText;
+ //# sourceMappingURL=DatetimeText.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Dot.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Dot.js
+index be41829..fc39b20 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Dot.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Dot.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.LineChartDot = LineChartDot;
+ var _react = _interopRequireDefault(require("react"));
+ var _reactNativeReanimated = _interopRequireWildcard(require("react-native-reanimated"));
+ var _reactNativeSvg = require("react-native-svg");
+@@ -112,4 +111,5 @@ function LineChartDot({
+     fill: color
+   }, outerDotProps)));
+ }
++exports.LineChartDot = LineChartDot;
+ //# sourceMappingURL=Dot.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Gradient.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Gradient.js
+index 6fe67c4..c679934 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Gradient.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Gradient.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.LineChartGradient = LineChartGradient;
+ var React = _interopRequireWildcard(require("react"));
+ var _reactNativeReanimated = _interopRequireDefault(require("react-native-reanimated"));
+ var _reactNativeSvg = require("react-native-svg");
+@@ -74,4 +73,5 @@ function LineChartGradient({
+     fill: `url(#${localId.current})`
+   }, props)));
+ }
++exports.LineChartGradient = LineChartGradient;
+ //# sourceMappingURL=Gradient.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Group.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Group.js
+index a858057..5ecd4fa 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Group.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Group.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.LineChartGroup = LineChartGroup;
+ var _react = _interopRequireWildcard(require("react"));
+ var _reactNative = require("react-native");
+ var _reactKeyedFlattenChildren = _interopRequireDefault(require("react-keyed-flatten-children"));
+@@ -26,4 +25,5 @@ function LineChartGroup({
+     return child;
+   }));
+ }
++exports.LineChartGroup = LineChartGroup;
+ //# sourceMappingURL=Group.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Highlight.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Highlight.js
+index 6f493ca..1bae12e 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Highlight.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Highlight.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.LineChartHighlight = LineChartHighlight;
+ var React = _interopRequireWildcard(require("react"));
+ var _reactNativeReanimated = _interopRequireDefault(require("react-native-reanimated"));
+ var _reactNativeSvg = require("react-native-svg");
+@@ -67,4 +66,5 @@ function LineChartHighlight({
+     strokeOpacity: isInactive && !inactiveColor ? 0.5 : 1
+   }, props)));
+ }
++exports.LineChartHighlight = LineChartHighlight;
+ //# sourceMappingURL=Highlight.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/HorizontalLine.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/HorizontalLine.js
+index f045167..c0af5af 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/HorizontalLine.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/HorizontalLine.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.LineChartHorizontalLine = LineChartHorizontalLine;
+ var _reactNativeReanimated = _interopRequireWildcard(require("react-native-reanimated"));
+ var _reactNativeSvg = require("react-native-svg");
+ var _Chart = require("./Chart");
+@@ -68,4 +67,5 @@ function LineChartHorizontalLine({
+     strokeDasharray: "3 3"
+   }, lineProps));
+ }
++exports.LineChartHorizontalLine = LineChartHorizontalLine;
+ //# sourceMappingURL=HorizontalLine.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Path.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Path.js
+index 3a9bd21..149bcbf 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Path.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Path.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.LineChartPath = LineChartPath;
+ var React = _interopRequireWildcard(require("react"));
+ var _reactNativeReanimated = _interopRequireDefault(require("react-native-reanimated"));
+ var _reactNativeSvg = require("react-native-svg");
+@@ -42,4 +41,5 @@ function LineChartPath({
+     strokeWidth: strokeWidth
+   }, props));
+ }
++exports.LineChartPath = LineChartPath;
+ //# sourceMappingURL=Path.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/PriceText.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/PriceText.js
+index 7e975fe..9bdaf61 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/PriceText.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/PriceText.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.LineChartPriceText = LineChartPriceText;
+ var _react = _interopRequireWildcard(require("react"));
+ var _reactNative = require("react-native");
+ var _reactNativeReanimated = require("react-native-reanimated");
+@@ -83,4 +82,5 @@ function LineChartPriceText({
+     style: style
+   });
+ }
++exports.LineChartPriceText = LineChartPriceText;
+ //# sourceMappingURL=PriceText.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Tooltip.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Tooltip.js
+index 46a95f1..d91a984 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Tooltip.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/Tooltip.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.LineChartTooltip = LineChartTooltip;
+ var _react = _interopRequireWildcard(require("react"));
+ var _reactNativeReanimated = _interopRequireWildcard(require("react-native-reanimated"));
+ var _reactNative = require("react-native");
+@@ -199,4 +198,5 @@ const styles = _reactNative.StyleSheet.create({
+     alignSelf: 'flex-start'
+   }
+ });
++exports.LineChartTooltip = LineChartTooltip;
+ //# sourceMappingURL=Tooltip.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/useAnimatedPath.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/useAnimatedPath.js
+index cc23244..7f23923 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/useAnimatedPath.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/useAnimatedPath.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.useAnimatedPath = useAnimatedPath;
+ var _reactNativeReanimated = require("react-native-reanimated");
+ var _utils = require("./utils");
+ var _utils2 = require("../../utils");
+@@ -35,4 +34,5 @@ function useAnimatedPath({
+     animatedProps
+   };
+ }
++exports.useAnimatedPath = useAnimatedPath;
+ //# sourceMappingURL=useAnimatedPath.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/useCurrentY.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/useCurrentY.js
+index 4a01919..a6b2204 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/useCurrentY.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/useCurrentY.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.useCurrentY = useCurrentY;
+ var _react = require("react");
+ var _reactNativeReanimated = require("react-native-reanimated");
+ var _reactNativeRedash = require("react-native-redash");
+@@ -27,4 +26,5 @@ function useCurrentY() {
+   }, [parsedPath, width, currentX]);
+   return currentY;
+ }
++exports.useCurrentY = useCurrentY;
+ //# sourceMappingURL=useCurrentY.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/useDatetime.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/useDatetime.js
+index 6f7ff3e..19b330f 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/useDatetime.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/useDatetime.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.useLineChartDatetime = useLineChartDatetime;
+ var _reactNativeReanimated = require("react-native-reanimated");
+ var _utils = require("../../utils");
+ var _useLineChart = require("./useLineChart");
+@@ -39,4 +38,5 @@ function useLineChartDatetime({
+     formatted
+   };
+ }
++exports.useLineChartDatetime = useLineChartDatetime;
+ //# sourceMappingURL=useDatetime.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/useLineChart.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/useLineChart.js
+index 9043ac8..68a2d10 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/useLineChart.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/useLineChart.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.useLineChart = useLineChart;
+ var _react = _interopRequireDefault(require("react"));
+ var _Context = require("./Context");
+ var _Data = require("./Data");
+@@ -22,4 +21,5 @@ function useLineChart() {
+     currentY
+   }), [lineChartContext, dataContext, currentY]);
+ }
++exports.useLineChart = useLineChart;
+ //# sourceMappingURL=useLineChart.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/usePrice.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/usePrice.js
+index bdae903..9d97ef9 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/usePrice.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/usePrice.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.useLineChartPrice = useLineChartPrice;
+ var _reactNativeReanimated = require("react-native-reanimated");
+ var _utils = require("../../utils");
+ var _useLineChart = require("./useLineChart");
+@@ -42,4 +41,5 @@ function useLineChartPrice({
+     formatted
+   };
+ }
++exports.useLineChartPrice = useLineChartPrice;
+ //# sourceMappingURL=usePrice.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getArea.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getArea.js
+index cb0a7b9..11b7773 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getArea.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getArea.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.getArea = getArea;
+ var shape = _interopRequireWildcard(require("d3-shape"));
+ var _d3Scale = require("d3-scale");
+ function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
+@@ -24,4 +23,5 @@ function getArea({
+   const area = shape.area().x((_, i) => scaleX(xDomain ? timestamps[i] ?? i : i)).y0(d => scaleY(d.value)).y1(() => height).curve(_shape)(data);
+   return area || '';
+ }
++exports.getArea = getArea;
+ //# sourceMappingURL=getArea.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getDomain.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getDomain.js
+index 9372899..96f8e0b 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getDomain.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getDomain.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.getDomain = getDomain;
+ function getDomain(rows) {
+   'worklet';
+
+@@ -13,4 +12,5 @@ function getDomain(rows) {
+   }) => value);
+   return [Math.min(...values), Math.max(...values)];
+ }
++exports.getDomain = getDomain;
+ //# sourceMappingURL=getDomain.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getPath.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getPath.js
+index 612d311..8aee3bf 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getPath.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getPath.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.getPath = getPath;
+ var shape = _interopRequireWildcard(require("d3-shape"));
+ var _d3Scale = require("d3-scale");
+ function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
+@@ -26,4 +25,5 @@ function getPath({
+   const path = shape.line().defined(d => from || to ? !!data.slice(from, to ? to + 1 : undefined).find(item => item.timestamp === d.timestamp) : true).x((_, i) => scaleX(xDomain ? timestamps[i] ?? i : i)).y(d => scaleY(d.value)).curve(_shape)(data);
+   return path || '';
+ }
++exports.getPath = getPath;
+ //# sourceMappingURL=getPath.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getXPositionForCurve.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getXPositionForCurve.js
+index d9bdf20..365c281 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getXPositionForCurve.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getXPositionForCurve.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.getXPositionForCurve = getXPositionForCurve;
+ function getXPositionForCurve(path, index) {
+   'worklet';
+
+@@ -16,4 +15,5 @@ function getXPositionForCurve(path, index) {
+   }
+   return point.to.x;
+ }
++exports.getXPositionForCurve = getXPositionForCurve;
+ //# sourceMappingURL=getXPositionForCurve.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/interpolatePath.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/interpolatePath.js
+index 11424d6..394932f 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/interpolatePath.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/interpolatePath.js
+@@ -3,10 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.interpolatePath = interpolatePath;
+-exports.interpolatePathCommands = interpolatePathCommands;
+-exports.pathCommandsFromString = pathCommandsFromString;
+-exports.splitCurve = splitCurve;
+ // @ts-nocheck
+
+ /**
+@@ -591,4 +587,8 @@ function interpolatePath(a, b, excludeSegment) {
+     return interpolatedString;
+   };
+ }
++exports.interpolatePath = interpolatePath;
++exports.interpolatePathCommands = interpolatePathCommands;
++exports.pathCommandsFromString = pathCommandsFromString;
++exports.splitCurve = splitCurve;
+ //# sourceMappingURL=interpolatePath.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/lineChartDataPropToArray.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/lineChartDataPropToArray.js
+index bef364d..9f33fa7 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/lineChartDataPropToArray.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/lineChartDataPropToArray.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.lineChartDataPropToArray = lineChartDataPropToArray;
+ function lineChartDataPropToArray(dataProp) {
+   'worklet';
+
+@@ -21,4 +20,5 @@ function lineChartDataPropToArray(dataProp) {
+   });
+   return data;
+ }
++exports.lineChartDataPropToArray = lineChartDataPropToArray;
+ //# sourceMappingURL=lineChartDataPropToArray.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/utils/formatDatetime.js b/node_modules/react-native-wagmi-charts/lib/commonjs/utils/formatDatetime.js
+index d8f1334..90cf1b4 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/utils/formatDatetime.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/utils/formatDatetime.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.formatDatetime = formatDatetime;
+ /**
+  * @worklet
+  */
+@@ -17,4 +16,5 @@ function formatDatetime({
+   const d = new Date(value);
+   return d.toLocaleString(locale, options);
+ }
++exports.formatDatetime = formatDatetime;
+ //# sourceMappingURL=formatDatetime.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/utils/formatPrice.js b/node_modules/react-native-wagmi-charts/lib/commonjs/utils/formatPrice.js
+index 527a5cb..7f5d1b4 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/utils/formatPrice.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/utils/formatPrice.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.formatPrice = formatPrice;
+ /**
+  * @worklet
+  */
+@@ -33,4 +32,5 @@ function formatPrice({
+   }
+   return res;
+ }
++exports.formatPrice = formatPrice;
+ //# sourceMappingURL=formatPrice.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/utils/usePrevious.js b/node_modules/react-native-wagmi-charts/lib/commonjs/utils/usePrevious.js
+index 15f2893..99ea241 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/utils/usePrevious.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/utils/usePrevious.js
+@@ -3,7 +3,6 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.usePrevious = usePrevious;
+ var _react = _interopRequireDefault(require("react"));
+ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+ function usePrevious(value) {
+@@ -17,4 +16,5 @@ function usePrevious(value) {
+   // Return previous value (happens before update in useEffect above)
+   return ref.current;
+ }
++exports.usePrevious = usePrevious;
+ //# sourceMappingURL=usePrevious.js.map
+\ No newline at end of file
