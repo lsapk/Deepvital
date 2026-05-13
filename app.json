@@ -25,7 +25,8 @@
     "plugins": [
       "expo-router",
       "expo-sqlite",
-      "react-native-health-connect"
+      "react-native-health-connect",
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true
