@@ -1,0 +1,38 @@
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getDomain.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getDomain.js
+index ff1a166..b17e9dc 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getDomain.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/candle/utils/getDomain.js
+@@ -3,7 +3,7 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.getDomain = getDomain;
++
+ function getDomain(rows) {
+   'worklet';
+
+@@ -17,3 +17,4 @@ function getDomain(rows) {
+   return [min - (max - min) * 0.025, max + (max - min) * 0.025];
+ }
+ //# sourceMappingURL=getDomain.js.map
++exports.getDomain = getDomain;
+\ No newline at end of file
+diff --git a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getDomain.js b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getDomain.js
+index 9372899..7aec69a 100644
+--- a/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getDomain.js
++++ b/node_modules/react-native-wagmi-charts/lib/commonjs/charts/line/utils/getDomain.js
+@@ -3,7 +3,7 @@
+ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+-exports.getDomain = getDomain;
++
+ function getDomain(rows) {
+   'worklet';
+
+@@ -14,3 +14,4 @@ function getDomain(rows) {
+   return [Math.min(...values), Math.max(...values)];
+ }
+ //# sourceMappingURL=getDomain.js.map
++exports.getDomain = getDomain;
+\ No newline at end of file
